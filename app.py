@@ -22,7 +22,7 @@ mongo=PyMongo(app)
 def index():
 
     # Find data
-    mars_info = mongo.db.mars.find_one()
+    mars_info = mongo.db.mars.find({})
 
     # return template and data
     return render_template("index.html", mars_info=mars_info)
@@ -42,12 +42,12 @@ def Scrape():
     #)
 
     mars_info={
-        "title":mars_dict["news_title"],
-        "paragraph":mars_dict["news_p"],
-        "feature_img_url":mars_dict["feature_img_url"],
-        "weather":mars_dict["mars_weather"],
-        "facts":mars_dict["mars_facts"],
-        "hemisphere_imgs":mars_dict["hemisphere_imgs"],
+        "title":mars_data["news_title"],
+        "paragraph":mars_data["news_p"],
+        "feature_img_url":mars_data["feature_img_url"],
+        "weather":mars_data["mars_weather"],
+        "facts":mars_data["mars_facts"],
+        "hemisphere_imgs":mars_data["hemisphere_imgs"],
 
     }
 
