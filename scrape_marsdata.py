@@ -32,7 +32,7 @@
 
 
 # In[4]:
-def Scrape():
+def scrape():
     print("COMMENCING SCRAPE")
     print("----------------------------------")
     from splinter import Browser
@@ -52,6 +52,7 @@ def Scrape():
     #Visit the Nasa Web for Mars News
     url = "https://mars.nasa.gov/news/"
     browser.visit(url)
+    time.sleep(2)
 
     #Scrape page into soup
     html = browser.html
@@ -165,38 +166,6 @@ def Scrape():
 
     # In[18]:
 
-
-    # # visit space facts and scrap the mars facts table
-    # mars_facts_url = 'https://space-facts.com/mars/'
-    # browser.visit(mars_facts_url)
-    # time.sleep(1)
-    # mars_facts_html = browser.html
-    # mars_facts_soup = bs(mars_facts_html, 'html.parser')
-    #
-    # fact_table = mars_facts_soup.find('table', class_='tablepress tablepress-id-mars')
-    # column1 = fact_table.find_all('td', class_='column-1')
-    # column2 = fact_table.find_all('td', class_='column-2')
-    #
-    # facets = []
-    # values = []
-    #
-    # for row in column1:
-    #     facet = row.text.strip()
-    #     facets.append(facet)
-    #
-    # for row in column2:
-    #     value = row.text.strip()
-    #     values.append(value)
-    #
-    # mars_facts = pd.DataFrame({
-    #     "Facet":facets,
-    #     "Value":values
-    #     })
-    #
-    # mars_facts_html = mars_facts.to_html(header=False, index=False)
-    # mars_facts
-    # mars_dict['mars_facts'] = mars_facts
-
     url_facts = "https://space-facts.com/mars/"
     time.sleep(2)
     table = pd.read_html(url_facts)
@@ -209,6 +178,7 @@ def Scrape():
     mars_html_table = mars_html_table.replace("\n", "")
     # mars_facts_data["mars_facts_table"] = mars_html_table
     mars_dict["mars_facts"]=mars_html_table
+    mars_html_table
     # ## Mars Hemispheres
 
     # In[9]:
@@ -250,145 +220,6 @@ def Scrape():
         mars_dict["hemisphere_imgs"]= hemi_dicts
 
     #     print(hemi_dicts)
-
-
-    # # In[7]:
-    #
-    #
-    #
-    #
-    # # ## Mars Hemispheres
-    #
-    # # Mars Hemispheres URL
-    # url = "https://astrogeology.usgs.gov/search/results?q=hemisphere+enhanced&k1=target&v1=Mars"
-    #
-    # # Empty list of image urls
-    # hemisphere_image_urls = []
-    #
-    #
-    # # ### Valles Marineris
-    #
-    # # Setting up splinter
-    # executable_path = {'executable_path': 'chromedriver.exe'}
-    # browser = Browser('chrome', executable_path = "chromedriver", headless=True)
-    #
-    # browser.visit(url)
-    #
-    # # Moving through pages
-    # time.sleep(5)
-    # browser.click_link_by_partial_text('Valles Marineris Hemisphere Enhanced')
-    # time.sleep(5)
-    #
-    # # Create BeautifulSoup object; parse with 'html.parser'
-    # html = browser.html
-    # soup = bs(html, 'html.parser')
-    #
-    # # Store link
-    # valles_link = soup.find('div', 'downloads').a['href']
-    #
-    # # Create dictionary
-    # valles_marineris = {
-    #     "title": "Valles Marineris Hemisphere",
-    #     "img_url": valles_link
-    # }
-    #
-    # # Appending dictionary
-    # hemisphere_image_urls.append(valles_marineris)
-    #
-    #
-    # # ### Cerberus
-    #
-    # # Setting up splinter
-    # executable_path = {'executable_path': 'chromedriver.exe'}
-    # browser = Browser('chrome', executable_path = "chromedriver", headless=True)
-    #
-    # browser.visit(url)
-    #
-    # # Moving through pages
-    # time.sleep(5)
-    # browser.click_link_by_partial_text('Cerberus Hemisphere Enhanced')
-    # time.sleep(5)
-    #
-    # # Create BeautifulSoup object; parse with 'html.parser'
-    # html = browser.html
-    # soup = bs(html, 'html.parser')
-    #
-    # # Store link
-    # cerberus_link = soup.find('div', 'downloads').a['href']
-    #
-    # # Create dictionary
-    # cerberus = {
-    #     "title": "Cerberus Hemisphere",
-    #     "img_url": cerberus_link
-    # }
-    #
-    # # Appending dictionary
-    # hemisphere_image_urls.append(cerberus)
-    #
-    #
-    # # ### Schiaparelli
-    #
-    # # Setting up splinter
-    # executable_path = {'executable_path': 'chromedriver.exe'}
-    # browser = Browser('chrome', executable_path = "chromedriver", headless=True)
-    #
-    # browser.visit(url)
-    #
-    # # Moving through pages
-    # time.sleep(5)
-    # browser.click_link_by_partial_text('Schiaparelli Hemisphere Enhanced')
-    # time.sleep(5)
-    #
-    # # Create BeautifulSoup object; parse with 'html.parser'
-    # html = browser.html
-    # soup = bs(html, 'html.parser')
-    #
-    # # Store link
-    # schiaparelli_link = soup.find('div', 'downloads').a['href']
-    #
-    # # Create dictionary
-    # schiaparelli = {
-    #     "title": "Schiaparelli Hemisphere",
-    #     "img_url": schiaparelli_link
-    # }
-    #
-    # # Appending dictionary
-    # hemisphere_image_urls.append(schiaparelli)
-    #
-    #
-    # # ### Syrtis Major
-    #
-    # # Setting up splinter
-    # executable_path = {'executable_path': 'chromedriver.exe'}
-    # browser = Browser('chrome', executable_path = "chromedriver", headless=True)
-    #
-    # browser.visit(url)
-    #
-    # # Moving through pages
-    # time.sleep(5)
-    # browser.click_link_by_partial_text('Syrtis Major Hemisphere Enhanced')
-    # time.sleep(5)
-    #
-    # # Create BeautifulSoup object; parse with 'html.parser'
-    # html = browser.html
-    # soup = bs(html, 'html.parser')
-    #
-    # # Store link
-    # syrtis_link = soup.find('div', 'downloads').a['href']
-    #
-    # # Create dictionary
-    # syrtis_major = {
-    #     "title": "Syrtis Major Hemisphere",
-    #     "img_url": syrtis_link
-    # }
-    #
-    # # Appending dictionary
-    # hemisphere_image_urls.append(syrtis_major)
-    #
-    # # Adding to dictionary
-    # # mars_dict["hemisphere_image_urls"] = hemisphere_image_urls
-    #
-    #
 
     # In[18]:
 

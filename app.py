@@ -22,7 +22,7 @@ mongo=PyMongo(app)
 def index():
 
     # Find data
-    mars_info = mongo.db.mars.find({})
+    mars_info = mongo.db.mars.find_one()
 
     # return template and data
     return render_template("index.html", mars_info=mars_info)
@@ -30,16 +30,10 @@ def index():
 
 # Route that will trigger scrape functions
 @app.route("/scrape")
-def Scrape():
+def scrape():
 
-    # Run scraped functions
-    # mars_info = db.mars
-    mars_data= scrape_marsdata.Scrape()
-    # mars_info.update(
-        # {},
-        # mars_data,
-        # upsert=True
-    #)
+    mars_data= scrape_marsdata.scrape()
+    
 
     mars_info={
         "title":mars_data["news_title"],
@@ -55,11 +49,11 @@ def Scrape():
     mongo.db.mars.insert_one(mars_info)
 
     #redirect back to home page
-    return redirect("/", code=302)
+    return index()
 
 
 
 if __name__ == "__main__":
     app.run(debug=True)
-    app.jinja_env.auto_reload = True
-    app.config['TEMPLATES_AUTO_RELOAD'] = True
+    # app.jinja_env.auto_reload = True
+    # app.config['TEMPLATES_AUTO_RELOAD'] = True
